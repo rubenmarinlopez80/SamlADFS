@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	protected RelyingPartyRegistrationRepository relyingPartyRegistrations() throws Exception {
 		ClassLoader classLoader = getClass().getClassLoader();
-		File verificationKey = new File(classLoader.getResource("./adfs.crt").getFile());
+		File verificationKey = new File(classLoader.getResource("saml-certificate/adfs.crt").getFile());
 	    X509Certificate certificate = X509Support.decodeCertificate(verificationKey);
 	    Saml2X509Credential credential = Saml2X509Credential.verification(certificate);
 	    RelyingPartyRegistration registration = RelyingPartyRegistration
