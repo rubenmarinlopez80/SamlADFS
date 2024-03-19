@@ -1,17 +1,18 @@
 package es.aragon.example.springboot.saml2;
 
 import java.io.File;
+import java.io.InputStream;
 import java.security.cert.X509Certificate;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.opensaml.security.x509.X509Support;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,6 +24,7 @@ import org.springframework.security.saml2.provider.service.registration.RelyingP
 import org.springframework.security.saml2.provider.service.servlet.filter.Saml2WebSsoAuthenticationFilter;
 import org.springframework.security.saml2.provider.service.web.DefaultRelyingPartyRegistrationResolver;
 import org.springframework.security.saml2.provider.service.web.Saml2MetadataFilter;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 @EnableWebSecurity
@@ -63,9 +65,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	protected RelyingPartyRegistrationRepository relyingPartyRegistrations() throws Exception {
+		
+		ClassPathResource classPathResource = new ClassPathResource("saml-certificate/adfs.crt");
+		InputStream inputStream = classPathResource.getInputStream();
+		File somethingFile = File.createTempFile("adfs", ".crt");
+		try {
+		    FileUtils.copyInputStreamToFile(inputStream, somethingFile);
+		} finally {
+		    IOUtils.closeQuietly(inputStream);
+		}
+		
+		
+		
 		ClassLoader classLoader = getClass().getClassLoader();
 		File verificationKey = new File(classLoader.getResource("saml-certificate/adfs.crt").getFile());
-	    X509Certificate certificate = X509Support.decodeCertificate(verificationKey);
+	    X509Certificate certificate = X509Support.decodeCertificate(somethingFile);
 	    Saml2X509Credential credential = Saml2X509Credential.verification(certificate);
 	    RelyingPartyRegistration registration = RelyingPartyRegistration
 	            .withRegistrationId("adfs-saml")
@@ -77,5 +91,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            ).build();
 	    return new InMemoryRelyingPartyRegistrationRepository(registration);
 	}
+	
+	
+
 	
 }
