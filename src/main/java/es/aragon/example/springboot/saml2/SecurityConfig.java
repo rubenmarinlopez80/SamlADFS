@@ -82,9 +82,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    X509Certificate certificate = X509Support.decodeCertificate(somethingFile);
 	    Saml2X509Credential credential = Saml2X509Credential.verification(certificate);
 	    RelyingPartyRegistration registration = RelyingPartyRegistration
-	            .withRegistrationId("testadfssaml")
+	            .withRegistrationId("testSAML")
 	            .assertingPartyDetails(party -> party
-	                .entityId("testadfssaml")
+	                .entityId("testSAML")
 	                .singleSignOnServiceLocation("http://ssoa.aragon.es/adfs/services/trust")
 	                .wantAuthnRequestsSigned(false)
 	                .verificationX509Credentials(c -> c.add(credential))
