@@ -88,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            .entityId(relyingPartyEntityId)
 	 			.assertionConsumerServiceLocation(assertingConsumerServiceLocation)
 	            .assertingPartyDetails(party -> party
-	                .entityId("testSAML")
+	                //.entityId("testSAML")
 	                .singleSignOnServiceLocation("http://ssoa.aragon.es/adfs/services/trust")
 	                .wantAuthnRequestsSigned(false)
 	                .verificationX509Credentials(c -> c.add(credential))
