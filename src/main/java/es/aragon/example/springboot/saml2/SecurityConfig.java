@@ -74,9 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		} finally {
 		    IOUtils.closeQuietly(inputStream);
 		}
-		
-		
-		
+
 		ClassLoader classLoader = getClass().getClassLoader();
 		File verificationKey = new File(classLoader.getResource("saml-certificate/adfs.crt").getFile());
 	    X509Certificate certificate = X509Support.decodeCertificate(somethingFile);
@@ -85,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            .withRegistrationId("testSAML")
 	            .assertingPartyDetails(party -> party
 	                .entityId("testSAML")
-	                .singleSignOnServiceLocation("https://ssoa.aragon.es/adfs/services/trust")
+	                .singleSignOnServiceLocation("http://ssoa.aragon.es/adfs/services/trust")
 	                .wantAuthnRequestsSigned(false)
 	                .verificationX509Credentials(c -> c.add(credential))
 	            ).build();
