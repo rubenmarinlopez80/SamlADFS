@@ -80,13 +80,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    X509Certificate certificate = X509Support.decodeCertificate(somethingFile);
 	    Saml2X509Credential credential = Saml2X509Credential.verification(certificate);
 
-	 	//String relyingPartyEntityId = "https://samladfs-tpvams.apps.pre.aragon.es/saml2/service-provider-metadata/testSAML";
-		//String assertingConsumerServiceLocation = "https://samladfs-tpvams.apps.pre.aragon.es/login/saml2/sso/testSAML";
+	 	String relyingPartyEntityId = "https://samladfs-tpvams.apps.pre.aragon.es/saml2/service-provider-metadata/testSAML";
+		String assertingConsumerServiceLocation = "https://samladfs-tpvams.apps.pre.aragon.es/login/saml2/sso/testSAML";
 		
 	    RelyingPartyRegistration registration = RelyingPartyRegistration
 	            .withRegistrationId("testSAML")
-	            //.entityId(relyingPartyEntityId)
-	 			//.assertionConsumerServiceLocation(assertingConsumerServiceLocation)
+	            .entityId(relyingPartyEntityId)
+	 			.assertionConsumerServiceLocation(assertingConsumerServiceLocation)
 	            .assertingPartyDetails(party -> party
 	                .entityId("testSAML")
 	                .singleSignOnServiceLocation("http://ssoa.aragon.es/adfs/services/trust")
