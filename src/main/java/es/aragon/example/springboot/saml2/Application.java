@@ -25,12 +25,14 @@ public class Application {
 
 	@RequestMapping("/")
 	public String index() {
+		logger.debug("Index");
 		return "home";
 	}
 
 	@RequestMapping("/secured/hello")
 	public String hello(@AuthenticationPrincipal Saml2AuthenticatedPrincipal principal, Model model) {
 		model.addAttribute("name", principal.getName());
+		logger.info("prueba"+principal.getName());
 		Map atributos =principal.getAttributes();
 		atributos.forEach((k,v) -> logger.info("Key: " + k + ": Value: " + v));
 		return "hello";
