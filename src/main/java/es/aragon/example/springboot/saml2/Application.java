@@ -25,7 +25,7 @@ public class Application {
 
 	@RequestMapping("/")
 	public String index() {
-		logger.debug("Index");
+		logger.info("Index");
 		return "home";
 	}
 
@@ -33,6 +33,10 @@ public class Application {
 	public String hello(@AuthenticationPrincipal Saml2AuthenticatedPrincipal principal, Model model) {
 		model.addAttribute("name", principal.getName());
 		logger.info("prueba"+principal.getName());
+		logger.info("prueba1"+principal.getAttribute("givenname"));
+		logger.info("prueba2"+principal.getAttribute("surname"));
+		logger.info("prueba3"+principal.getAttribute("emailaddress"));
+		logger.info("prueba4"+principal.getAttribute("upn"));
 		Map atributos =principal.getAttributes();
 		atributos.forEach((k,v) -> logger.info("Key: " + k + ": Value: " + v));
 		return "hello";
