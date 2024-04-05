@@ -75,8 +75,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		    IOUtils.closeQuietly(inputStream);
 		}
 
-		ClassLoader classLoader = getClass().getClassLoader();
-		File verificationKey = new File(classLoader.getResource("saml-certificate/adfs.crt").getFile());
+		//ClassLoader classLoader = getClass().getClassLoader();
+		//File verificationKey = new File(classLoader.getResource("saml-certificate/adfs.crt").getFile());
 	    X509Certificate certificate = X509Support.decodeCertificate(somethingFile);
 	    Saml2X509Credential credential = Saml2X509Credential.verification(certificate);
 

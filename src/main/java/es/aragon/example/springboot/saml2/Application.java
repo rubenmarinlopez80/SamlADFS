@@ -1,5 +1,7 @@
 package es.aragon.example.springboot.saml2;
 
+import java.util.Map;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +26,8 @@ public class Application {
 	@RequestMapping("/secured/hello")
 	public String hello(@AuthenticationPrincipal Saml2AuthenticatedPrincipal principal, Model model) {
 		model.addAttribute("name", principal.getName());
+		Map atributos =principal.getAttributes();
+		atributos.forEach((k,v) -> System.out.println("Key: " + k + ": Value: " + v));
 		return "hello";
 	}
 
