@@ -8,6 +8,9 @@
 	</head>
 	<body>
 		<h1>Secured Page</h1>
-		<p th:text="'Hello, ' + ${name} + '!'" />
+		<p th:text="'Hello, ' + ${givenname} + ${surname} + ${emailaddress}'!'" />
+		Nombre :<p th:text=${givenname} />
+		Apellidos: <p th:text=${surname} />
+		Email: <p th:text=${emailaddress} />
 	</body>
 </html>
