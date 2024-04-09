@@ -33,10 +33,12 @@ public class Application {
 	public String hello(@AuthenticationPrincipal Saml2AuthenticatedPrincipal principal, Model model) {
 		model.addAttribute("name", principal.getName());
 		logger.info("prueba"+principal.getName());
-		logger.info("prueba1"+principal.getAttribute("givenname"));
-		logger.info("prueba2"+principal.getAttribute("surname"));
-		logger.info("prueba3"+principal.getAttribute("emailaddress"));
-		logger.info("prueba4"+principal.getAttribute("upn"));
+		logger.info("prueba1"+principal.getAttribute("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"));
+		model.addAttribute("givenname", principal.getAttribute("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname"));
+		logger.info("prueba2"+principal.getAttribute("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"));
+		model.addAttribute("surname", principal.getAttribute("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname"));
+		logger.info("prueba3"+principal.getAttribute("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"));
+		model.addAttribute("emailaddress", principal.getAttribute("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"));
 		Map atributos =principal.getAttributes();
 		atributos.forEach((k,v) -> logger.info("Key: " + k + ": Value: " + v));
 		return "hello";
