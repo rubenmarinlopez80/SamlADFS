@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        )
 	    	.saml2Login();
 		
-		String cookieNamesToClear = "https://samladfs-tpvams.apps.pre.aragon.es/";
+		String cookieNamesToClear = "JSESSIONID";
 		   http
 	        .logout(logout ->                                                       
 	            logout
