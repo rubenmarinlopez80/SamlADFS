@@ -2,6 +2,7 @@ package es.aragon.example.springboot.saml2;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -51,13 +52,23 @@ public class Application {
 	
 	SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 
-	/*@RequestMapping("/mylogout")
+	@RequestMapping("/mylogout")
 	public String performLogout(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
 	    // .. perform logout
 		logger.info("Entramos al logout");
 	    this.logoutHandler.logout(request, response, authentication);
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	      int i = 0;
+	      boolean cookieExists = false;
+	      while (!cookieExists && i < cookies.length) {
+	    	  logger.info("Entramos a cookie "+i+" "+cookies[i].getName());
+	    	  cookies[i].setMaxAge(0);
+	          i++;
+	      }
+	    }
 		return "home";
-	}*/
+	}
 
 
 }
