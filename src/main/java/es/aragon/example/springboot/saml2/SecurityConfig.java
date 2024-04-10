@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        )
 	    	.saml2Login();
 		
-		String cookieNamesToClear = "JSESSIONID";
+		String cookieNamesToClear = "JSESSIONID,SamlSession";
 		   http
 	        .logout(logout ->                                                       
 	            logout
