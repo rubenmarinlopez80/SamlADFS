@@ -26,6 +26,7 @@ import org.springframework.security.saml2.provider.service.servlet.filter.Saml2W
 import org.springframework.security.saml2.provider.service.web.DefaultRelyingPartyRegistrationResolver;
 import org.springframework.security.saml2.provider.service.web.Saml2MetadataFilter;
 import org.springframework.core.io.ClassPathResource;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -37,22 +38,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-	    	.authorizeRequests(authorize -> 
+	    	.authorizeHttpRequests(authorize -> 
 	    		authorize.antMatchers("/").permitAll().anyRequest().authenticated()
 	        )
-	    	.saml2Login();
+	    	.saml2Login(withDefaults())
+	    	.saml2Logout(withDefaults());
 		
 
-		   http
+		   /*http
 	        .logout(logout ->                                                       
 	            logout
-	                .logoutUrl("/mylogout")                                        
+	                .logoutUrl("/logout")                                        
 	                .logoutSuccessUrl("/")                             
 	                .invalidateHttpSession(true)  
 	                .deleteCookies("JSESSIONID","c90842ecbf0488c89c2e45321ba1c45d","SamlSession") 
 	                .clearAuthentication(true)
 	            
-	        );
+	        );*/
 
 		// add auto-generation of ServiceProvider Metadata
 		Converter<HttpServletRequest, RelyingPartyRegistration> relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
