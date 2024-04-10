@@ -3,6 +3,7 @@ package es.aragon.example.springboot.saml2;
 import java.io.File;
 import java.io.InputStream;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,14 +42,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        )
 	    	.saml2Login();
 		
-		String cookieNamesToClear = "JSESSIONID,SamlSession";
+
 		   http
 	        .logout(logout ->                                                       
 	            logout
 	                .logoutUrl("/logout")                                        
 	                .logoutSuccessUrl("/")                             
 	                .invalidateHttpSession(true)  
-	                .deleteCookies(cookieNamesToClear) 
+	                .deleteCookies("JSESSIONID","c90842ecbf0488c89c2e45321ba1c45d","SamlSession") 
+	                .clearAuthentication(true)
+	            
 	        );
 
 		// add auto-generation of ServiceProvider Metadata
