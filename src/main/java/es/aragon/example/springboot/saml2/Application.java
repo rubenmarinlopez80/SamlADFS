@@ -57,16 +57,17 @@ public class Application {
 	public String performLogout(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
 	    // .. perform logout
 		logger.info("Entramos al logout");
-	    this.logoutHandler.logout(request, response, authentication);
-	    /*Cookie[] cookies = request.getCookies();
+	    //this.logoutHandler.logout(request, response, authentication);
+	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
 	      int i = 0;
+	      logger.info("Longitud cookies "+cookies.length);
 	      while ( i < cookies.length) {
-	    	  logger.info("Entramos antes de borrar cookie "+i+" "+cookies[i].getName());
+	    	  logger.info("Entramos antes de borrar cookie "+i+" "+cookies[i].getName()+cookies[i].getDomain());
 	    	  cookies[i].setMaxAge(0);
 	          i++;
 	      }
-	    }*/
+	    }
 	    deleteCookiesFromDomain(request,response,"samladfs-tpvams.apps.pre.aragon.es");
 	    deleteCookiesFromDomain(request,response,"ssoa.aragon.es");
 
