@@ -38,7 +38,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 	    	.authorizeRequests(authorize -> 
 	    		authorize.antMatchers("/").permitAll().anyRequest().authenticated()
-	        ).saml2Login();
+	        )
+	    	.saml2Login();
+		
+		String cookieNamesToClear = "https://samladfs-tpvams.apps.pre.aragon.es/";
+		   http
+	        .logout(logout ->                                                       
+	            logout
+	                .logoutUrl("/logout")                                        
+	                .logoutSuccessUrl("/")                             
+	                .invalidateHttpSession(true)  
+	                .deleteCookies(cookieNamesToClear) 
+	        );
 
 		// add auto-generation of ServiceProvider Metadata
 		Converter<HttpServletRequest, RelyingPartyRegistration> relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
