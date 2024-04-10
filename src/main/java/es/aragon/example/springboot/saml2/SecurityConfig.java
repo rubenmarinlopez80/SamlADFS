@@ -41,11 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    	.authorizeHttpRequests(authorize -> 
 	    		authorize.antMatchers("/").permitAll().anyRequest().authenticated()
 	        )
-	    	.saml2Login(withDefaults())
-	    	.saml2Logout(withDefaults());
+	    	.saml2Login();
 		
 
-		   /*http
+		   http
 	        .logout(logout ->                                                       
 	            logout
 	                .logoutUrl("/logout")                                        
@@ -54,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                .deleteCookies("JSESSIONID","c90842ecbf0488c89c2e45321ba1c45d","SamlSession") 
 	                .clearAuthentication(true)
 	            
-	        );*/
+	        );
 
 		// add auto-generation of ServiceProvider Metadata
 		Converter<HttpServletRequest, RelyingPartyRegistration> relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
