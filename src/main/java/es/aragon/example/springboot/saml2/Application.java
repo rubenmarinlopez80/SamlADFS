@@ -1,5 +1,6 @@
 package es.aragon.example.springboot.saml2;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -62,13 +63,32 @@ public class Application {
 	      int i = 0;
 	      boolean cookieExists = false;
 	      while (!cookieExists && i < cookies.length) {
-	    	  logger.info("Entramos a cookie "+i+" "+cookies[i].getName());
+	    	  logger.info("Entramos antes de borrar cookie "+i+" "+cookies[i].getName());
+	    	  cookies[i].setMaxAge(0);
+	          i++;
+	      }
+	    }
+	    deleteCookiesFromDomain(request,response,"samladfs-tpvams.apps.pre.aragon.es");
+	    deleteCookiesFromDomain(request,response,"ssoa.aragon.es");
+	    cookies = request.getCookies();
+	    if (cookies != null) {
+	      int i = 0;
+	      boolean cookieExists = false;
+	      while (!cookieExists && i < cookies.length) {
+	    	  logger.info("Entramos antes de borrar cookie "+i+" "+cookies[i].getName());
 	    	  cookies[i].setMaxAge(0);
 	          i++;
 	      }
 	    }
 		return "home";
 	}
-
+	
+	public void deleteCookiesFromDomain(HttpServletRequest request, HttpServletResponse response, String domain) {
+	    Arrays.stream(request.getCookies()).filter(cookie -> cookie.getDomain().equals(domain)).forEach(cookie -> {
+	        cookie.setMaxAge(0);
+	        cookie.setPath("/");
+	        response.addCookie(cookie);
+	 });
+	}
 
 }
