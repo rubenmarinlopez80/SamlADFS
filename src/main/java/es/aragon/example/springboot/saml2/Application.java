@@ -61,8 +61,7 @@ public class Application {
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
 	      int i = 0;
-	      boolean cookieExists = false;
-	      while (!cookieExists && i < cookies.length) {
+	      while ( i < cookies.length) {
 	    	  logger.info("Entramos antes de borrar cookie "+i+" "+cookies[i].getName());
 	    	  cookies[i].setMaxAge(0);
 	          i++;
@@ -73,9 +72,8 @@ public class Application {
 	    cookies = request.getCookies();
 	    if (cookies != null) {
 	      int i = 0;
-	      boolean cookieExists = false;
-	      while (!cookieExists && i < cookies.length) {
-	    	  logger.info("Entramos antes de borrar cookie "+i+" "+cookies[i].getName());
+	      while ( i < cookies.length) {
+	    	  logger.info("Entramos despues de borrar cookie "+i+" "+cookies[i].getName());
 	    	  cookies[i].setMaxAge(0);
 	          i++;
 	      }
