@@ -74,11 +74,18 @@ public class Application {
 	}
 	
 	public void deleteCookiesFromDomain(HttpServletRequest request, HttpServletResponse response, String domain) {
-	    Arrays.stream(request.getCookies()).filter(cookie -> cookie.getDomain().equals(domain)).forEach(cookie -> {
-	        cookie.setMaxAge(0);
-	        cookie.setPath("/");
-	        response.addCookie(cookie);
-	 });
+	    	try {
+				Arrays.stream(request.getCookies()).filter(cookie -> cookie.getDomain().equals(domain)).forEach(cookie -> {
+		    	if (cookie!= null)
+					logger.info("Dominio "+domain+" Cookie"+cookie.getName());
+			    	cookie.setMaxAge(0);
+			        cookie.setPath("/");
+			        response.addCookie(cookie);
+				});
+	    	} catch (Exception e) {
+				e.getMessage();
+
+			}
 	}
 
 }
