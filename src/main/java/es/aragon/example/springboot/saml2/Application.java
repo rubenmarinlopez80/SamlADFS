@@ -58,7 +58,7 @@ public class Application {
 	    // .. perform logout
 		logger.info("Entramos al logout");
 	    this.logoutHandler.logout(request, response, authentication);
-	    Cookie[] cookies = request.getCookies();
+	    /*Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
 	      int i = 0;
 	      while ( i < cookies.length) {
@@ -66,18 +66,10 @@ public class Application {
 	    	  cookies[i].setMaxAge(0);
 	          i++;
 	      }
-	    }
+	    }*/
 	    deleteCookiesFromDomain(request,response,"samladfs-tpvams.apps.pre.aragon.es");
 	    deleteCookiesFromDomain(request,response,"ssoa.aragon.es");
-	    cookies = request.getCookies();
-	    if (cookies != null) {
-	      int i = 0;
-	      while ( i < cookies.length) {
-	    	  logger.info("Entramos despues de borrar cookie "+i+" "+cookies[i].getName());
-	    	  cookies[i].setMaxAge(0);
-	          i++;
-	      }
-	    }
+
 		return "home";
 	}
 	
