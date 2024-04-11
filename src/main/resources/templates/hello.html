@@ -43,12 +43,17 @@
 		 * Elimina la cookie indicada
 		 */
 		function borrarCookie(){ // v2010-03-26
-		    escribirCookie("JSESSIONID", "", -86400*365*10);
-		    escribirCookie("c90842ecbf0488c89c2e45321ba1c45d", "", -86400*365*10);
-		    escribirCookie("SamlSession", "", -86400*365*10);
-		    escribirCookie("MSISAuth", "", -86400*365*10);
-		    escribirCookie("MSISAuthenticated", "", -86400*365*10);
-		    escribirCookie("MSISLoopDetectionCookie", "", -86400*365*10);
+			
+			 var mensaje = confirm("¿Deseas cerrar la sesión?");
+
+		        if (mensaje) {
+				    escribirCookie("JSESSIONID", "", -86400*365*10);
+				    escribirCookie("c90842ecbf0488c89c2e45321ba1c45d", "", -86400*365*10);
+				    escribirCookie("SamlSession", "", -86400*365*10);
+				    escribirCookie("MSISAuth", "", -86400*365*10);
+				    escribirCookie("MSISAuthenticated", "", -86400*365*10);
+				    escribirCookie("MSISLoopDetectionCookie", "", -86400*365*10);
+		        }
 		}
 
 
