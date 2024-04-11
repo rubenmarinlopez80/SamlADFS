@@ -7,8 +7,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" href="https://desy.aragon.es/pages/desy-html-templates/css/styles.css"/>
 		<script>
-
-			$("#cerrar").click(function() {
+		function cerrar() {
+			
 			     var mensaje = confirm("¿Deseas cerrar la sesión?");
 
 			        if (mensaje) {
@@ -16,7 +16,7 @@
 			            alert("adios");
 			            location.reload(true);
 			        }
-			});
+		}
 		</script>
 	</head>
 	<body>
@@ -86,6 +86,7 @@
 
 		<p>Pulse <a th:href="@{/secured/hello}" class="c-link">aquí </a>para acceder a una página segura.</p>
 		 <a class="prev" onclick="cerrar()">Cerrar Sesion</a>
+		 <button onclick="cerrar()">Haz clic</button>
 		<!-- footer -->
 			<footer class="py-base bg-neutral-lighter border-t border-neutral-base text-xs lg:text-sm
 			text-neutral-dark lg:mt-48">

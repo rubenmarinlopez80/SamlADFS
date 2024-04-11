@@ -7,16 +7,16 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" href="https://desy.aragon.es/pages/desy-html-templates/css/styles.css"/>
 		<script>
+		function cerrar() {
+			
+		     var mensaje = confirm("¿Deseas cerrar la sesión?");
 
-			$("#cerrar").click(function() {
-			     var mensaje = confirm("¿Deseas cerrar la sesión?");
-
-			        if (mensaje) {
-			            document.cookie = "bandera=; expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=ssoa.aragon.es";
-			            alert("adios");
-			            location.reload(true);
-			        }
-			});
+		        if (mensaje) {
+		            document.cookie = "bandera=; expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=ssoa.aragon.es";
+		            alert("adios");
+		            location.reload(true);
+		        }
+		}
 		</script>
 	</head>
 	<body>
@@ -128,6 +128,7 @@
     </dd>
   </div>
    <a class="prev" onclick="cerrar()">Cerrar Sesion</a>
+   <button onclick="cerrar()">Haz clic</button>
 
 </dl>
 <!-- /description-list -->
