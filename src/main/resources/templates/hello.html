@@ -32,7 +32,7 @@
 			    }
 
 			    document.cookie = escape(nombre) +
-			        (expires ? "; expires=0":"") +
+			        (expires ? "; expires=" + expires.toGMTString() : "") +
 			        (ruta    ? "; path="    + escape(ruta) : "") +
 			        (dominio ? "; domain="  + escape(dominio) : "") +
 			        (segura  ? "; secure" : "");
@@ -47,12 +47,12 @@
 				 var mensaje = confirm("¿Deseas cerrar la sesión?");
 
 			        if (mensaje) {
-					    escribirCookie("JSESSIONID", "", 0,"/","samladfs-tpvams.apps.pre.aragon.es");
-					    escribirCookie("c90842ecbf0488c89c2e45321ba1c45d", "", 0,"/","samladfs-tpvams.apps.pre.aragon.es");
-					    escribirCookie("SamlSession", "", 0,"/","ssoa.aragon.es");
-					    escribirCookie("MSISAuth", "", 0,"/","ssoa.aragon.es");
-					    escribirCookie("MSISAuthenticated", "", 0,"/","ssoa.aragon.es");
-					    escribirCookie("MSISLoopDetectionCookie", "", 0,"/","ssoa.aragon.es");
+			        	 escribirCookie("JSESSIONID", "", -86400*365*10,"/","samladfs-tpvams.apps.pre.aragon.es");
+						    escribirCookie("c90842ecbf0488c89c2e45321ba1c45d", "", -86400*365*10,"/","samladfs-tpvams.apps.pre.aragon.es");
+						    escribirCookie("SamlSession", "", -86400*365*10,"/","ssoa.aragon.es");
+						    escribirCookie("MSISAuth", "", -86400*365*10,"/","ssoa.aragon.es");
+						    escribirCookie("MSISAuthenticated", "", -86400*365*10,"/","ssoa.aragon.es");
+						    escribirCookie("MSISLoopDetectionCookie", "", -86400*365*10,"/","ssoa.aragon.es");
 			        }
 			}
 
