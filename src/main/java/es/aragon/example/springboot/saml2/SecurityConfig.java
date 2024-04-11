@@ -22,6 +22,7 @@ import org.springframework.security.saml2.provider.service.metadata.OpenSamlMeta
 import org.springframework.security.saml2.provider.service.registration.InMemoryRelyingPartyRegistrationRepository;
 import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistration;
 import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrationRepository;
+import org.springframework.security.saml2.provider.service.registration.RelyingPartyRegistrations;
 import org.springframework.security.saml2.provider.service.servlet.filter.Saml2WebSsoAuthenticationFilter;
 import org.springframework.security.saml2.provider.service.web.DefaultRelyingPartyRegistrationResolver;
 import org.springframework.security.saml2.provider.service.web.Saml2MetadataFilter;
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                .logoutUrl("/logout")                                        
 	                .logoutSuccessUrl("/")                             
 	                .invalidateHttpSession(true)  
-	                .deleteCookies("JSESSIONID","c90842ecbf0488c89c2e45321ba1c45d","SamlSession") 
+	                .deleteCookies("JSESSIONID","c90842ecbf0488c89c2e45321ba1c45d","SamlSession","MSISAuth","MSISAuthenticated","MSISLoopDetectionCookie") 
 	                .clearAuthentication(true)
 	            
 	        );
@@ -59,25 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		Converter<HttpServletRequest, RelyingPartyRegistration> relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
 		Saml2MetadataFilter filter = new Saml2MetadataFilter(relyingPartyRegistrationResolver, new OpenSamlMetadataResolver());
 		http.addFilterBefore(filter, Saml2WebSsoAuthenticationFilter.class);
+		
 	}
-	
-	/*@Bean
-	protected RelyingPartyRegistrationRepository relyingPartyRegistrationsOKTA() throws Exception {
-		ClassLoader classLoader = getClass().getClassLoader();
-		File verificationKey = new File(classLoader.getResource("saml-certificate/okta.crt").getFile());
-	    X509Certificate certificate = X509Support.decodeCertificate(verificationKey);
-	    Saml2X509Credential credential = Saml2X509Credential.verification(certificate);
-	    RelyingPartyRegistration registration = RelyingPartyRegistration
-	            .withRegistrationId("okta-saml")
-	            .assertingPartyDetails(party -> party
-	                .entityId("http://www.okta.com/exk6sni93NCyDl9VP5d6")
-	                .singleSignOnServiceLocation("https://dev-11017565.okta.com/app/dev-11017565_appsaml_1/exk6sni93NCyDl9VP5d6/sso/saml")
-	                .wantAuthnRequestsSigned(false)
-	                .verificationX509Credentials(c -> c.add(credential))
-	            ).build();
-	    return new InMemoryRelyingPartyRegistrationRepository(registration);
-	}*/
-	
+
 	@Bean
 	protected RelyingPartyRegistrationRepository relyingPartyRegistrations() throws Exception {
 		
@@ -110,6 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            ).build();
 	    return new InMemoryRelyingPartyRegistrationRepository(registration);
 	}
+
 	
 	
 
