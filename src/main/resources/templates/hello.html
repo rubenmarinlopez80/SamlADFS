@@ -25,36 +25,36 @@
 		 * - Si no se indica duración (o se establece a false) la cookie se borra al salir
 		 * - Si no se indica una ruta se asigna la del documento donde ejecutamos el script
 		 */
-		function escribirCookie(nombre, valor, duracion, ruta, dominio, segura){ // v2010-03-26
-		    if(duracion){
-		        var expires = new Date();
-		        expires.setUTCMilliseconds(expires.getUTCMilliseconds() + 1000*duracion);
-		    }
+			function escribirCookie(nombre, valor, duracion, ruta, dominio, segura){ // v2010-03-26
+			    if(duracion){
+			        var expires = new Date();
+			        expires.setUTCMilliseconds(expires.getUTCMilliseconds() + 1000*duracion);
+			    }
 
-		    document.cookie = escape(nombre) + "=" + (valor? escape(valor) : "") +
-		        (expires ? "; expires=" + expires.toGMTString() : "") +
-		        (ruta    ? "; path="    + escape(ruta) : "") +
-		        (dominio ? "; domain="  + escape(dominio) : "") +
-		        (segura  ? "; secure" : "");
-		}
+			    document.cookie = escape(nombre) + "=" + (valor? escape(valor) : "") +
+			        (expires ? "; expires=0":"") +
+			        (ruta    ? "; path="    + escape(ruta) : "") +
+			        (dominio ? "; domain="  + escape(dominio) : "") +
+			        (segura  ? "; secure" : "");
+			}
 
 
-		/**
-		 * Elimina la cookie indicada
-		 */
-		function borrarCookie(){ // v2010-03-26
-			
-			 var mensaje = confirm("¿Deseas cerrar la sesión?");
+			/**
+			 * Elimina la cookie indicada
+			 */
+			function borrarCookie(){ // v2010-03-26
+					
+				 var mensaje = confirm("¿Deseas cerrar la sesión?");
 
-		        if (mensaje) {
-				    escribirCookie("JSESSIONID", "", -86400*365*10);
-				    escribirCookie("c90842ecbf0488c89c2e45321ba1c45d", "", -86400*365*10);
-				    escribirCookie("SamlSession", "", -86400*365*10);
-				    escribirCookie("MSISAuth", "", -86400*365*10);
-				    escribirCookie("MSISAuthenticated", "", -86400*365*10);
-				    escribirCookie("MSISLoopDetectionCookie", "", -86400*365*10);
-		        }
-		}
+			        if (mensaje) {
+					    escribirCookie("JSESSIONID", "", 0);
+					    escribirCookie("c90842ecbf0488c89c2e45321ba1c45d", "", 0);
+					    escribirCookie("SamlSession", "", 0);
+					    escribirCookie("MSISAuth", "", 0);
+					    escribirCookie("MSISAuthenticated", "", 0);
+					    escribirCookie("MSISLoopDetectionCookie", "", 0);
+			        }
+			}
 
 
 		/**
