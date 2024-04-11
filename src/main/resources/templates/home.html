@@ -13,9 +13,59 @@
 
 			        if (mensaje) {
 			            document.cookie = "bandera=; expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=ssoa.aragon.es";
+			            document.cookie = "bandera=; expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;samladfs-tpvams.apps.pre.aragon.es";
 			            alert("adios");
 			            location.reload(true);
 			        }
+		}
+		
+		/**
+		 * Crea una cookie - nombre [valor] [duracion (s)] [ruta] [dominio] [segura (bool)]
+		 *
+		 * Notas:
+		 * - Si no se indica duración (o se establece a false) la cookie se borra al salir
+		 * - Si no se indica una ruta se asigna la del documento donde ejecutamos el script
+		 */
+		function escribirCookie(nombre, valor, duracion, ruta, dominio, segura){ // v2010-03-26
+		    if(duracion){
+		        var expires = new Date();
+		        expires.setUTCMilliseconds(expires.getUTCMilliseconds() + 1000*duracion);
+		    }
+
+		    document.cookie = escape(nombre) + "=" + (valor? escape(valor) : "") +
+		        (expires ? "; expires=" + expires.toGMTString() : "") +
+		        (ruta    ? "; path="    + escape(ruta) : "") +
+		        (dominio ? "; domain="  + escape(dominio) : "") +
+		        (segura  ? "; secure" : "");
+		}
+
+
+		/**
+		 * Elimina la cookie indicada
+		 */
+		function borrarCookie(){ // v2010-03-26
+		    escribirCookie("JSESSIONID", "", -86400*365*10);
+		    escribirCookie("c90842ecbf0488c89c2e45321ba1c45d", "", -86400*365*10);
+		    escribirCookie("SamlSession", "", -86400*365*10);
+		    escribirCookie("MSISAuth", "", -86400*365*10);
+		    escribirCookie("MSISAuthenticated", "", -86400*365*10);
+		    escribirCookie("MSISLoopDetectionCookie", "", -86400*365*10);
+		}
+
+
+		/**
+		 * Devuelve el valor de la cookie indicada o null si no existe
+		 */
+		function leerCookie(nombre){ // v2010-03-26
+		    var re = new RegExp("^(" + escape(nombre) + ")=(.*)$", "i");
+		    var c = document.cookie.split(/;\s*/);
+
+		    for(var i in c){
+		        if(re.test(c[i])){
+		            return unescape(re.exec(c[i])[2]);
+		        }
+		    }
+		    return null;
 		}
 		</script>
 	</head>
@@ -85,8 +135,8 @@
 <!-- /header-advanced -->
 
 		<p>Pulse <a th:href="@{/secured/hello}" class="c-link">aquí </a>para acceder a una página segura.</p>
-		 <a class="prev" onclick="cerrar()">Cerrar Sesion</a>
-		 <button onclick="cerrar()">Haz clic</button>
+		 <a class="prev" onclick="borrarCookie()">Cerrar Sesion</a>
+		 <button onclick="borrarCookie()">Haz clic</button>
 		<!-- footer -->
 			<footer class="py-base bg-neutral-lighter border-t border-neutral-base text-xs lg:text-sm
 			text-neutral-dark lg:mt-48">
