@@ -51,7 +51,7 @@ public class Application {
 		return "hello";
 	}
 	
-	SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+	/*SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 
 	@RequestMapping("/mylogout")
 	public String performLogout(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
@@ -87,6 +87,6 @@ public class Application {
 				e.getMessage();
 
 			}
-	}
+	}*/
 
 }
