@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    	.saml2Login();
 		
 
-		   http
+		  /* http
 	        .logout(logout ->                                                       
 	            logout
 	                .logoutUrl("/logout")                                        
@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                .deleteCookies("JSESSIONID","c90842ecbf0488c89c2e45321ba1c45d","SamlSession","MSISAuth","MSISAuthenticated","MSISLoopDetectionCookie") 
 	                .clearAuthentication(true)
 	            
-	        );
+	        );*/
 
 		// add auto-generation of ServiceProvider Metadata
 		Converter<HttpServletRequest, RelyingPartyRegistration> relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
