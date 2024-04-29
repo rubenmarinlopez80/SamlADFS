@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            .assertingPartyDetails(party -> party
 	                .entityId("http://ssoa.aragon.es/adfs/services/trust")
 	                .singleSignOnServiceLocation("https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon")
-	                .singleLogoutServiceLocation("https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon")
+	                //.singleLogoutServiceLocation("https://samladfs-tpvams.apps.pre.aragon.es/logout/saml2/slo")
 	                .wantAuthnRequestsSigned(false)
 	                .verificationX509Credentials(c -> c.add(credential))
 	            ).build();
