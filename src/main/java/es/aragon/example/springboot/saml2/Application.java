@@ -1,6 +1,12 @@
 package es.aragon.example.springboot.saml2;
 
+import java.io.*;
 import java.util.Map;
+
+import javax.servlet.http.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,16 +53,51 @@ public class Application {
 	
 	SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 
-	/*@RequestMapping("/mylogout")
+	@RequestMapping("/mylogout")
 	public String performLogout(@AuthenticationPrincipal Saml2AuthenticatedPrincipal principal, HttpServletRequest request, HttpServletResponse response) {
 	    // .. perform logout
 		logger.info("Entramos al logout");
 		
-		
+		String url = "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0";
+		try {
+			URL obj= new URL(url);
+			
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+	
+			// optional default is GET
+			con.setRequestMethod("GET");
+	
+			//add request header
+			con.setRequestProperty("cache-control", "no-cache");
+			con.setRequestProperty("X-API-KEY", "myApiKey");
+			con.setRequestProperty("X-API-EMAIL", "myEmail@mail.com");
+	
+			int responseCode = con.getResponseCode();
+			System.out.println("\nSending 'GET' request to URL : " + url);
+			System.out.println("Response Code : " + responseCode);
+	
+			BufferedReader in = new BufferedReader(
+			           new InputStreamReader(con.getInputStream()));
+			String inputLine;
+			StringBuffer responseBuffer = new StringBuffer();
+	
+			while ((inputLine = in.readLine()) != null) {
+				responseBuffer.append(inputLine);
+			}
+			in.close();
+	
+			//print result
+			System.out.println(responseBuffer.toString());
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	    return "home";
 	    
-	    //this.logoutHandler.logout(request, response, authentication);
+	    /*//this.logoutHandler.logout(request, response, authentication);
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
 	      int i = 0;
@@ -68,12 +109,12 @@ public class Application {
 	      }
 	    }
 	    deleteCookiesFromDomain(request,response,"samladfs-tpvams.apps.pre.aragon.es");
-	    deleteCookiesFromDomain(request,response,"ssoa.aragon.es");
+	    deleteCookiesFromDomain(request,response,"ssoa.aragon.es");*/
 
 		
 	}
 	
-	public void deleteCookiesFromDomain(HttpServletRequest request, HttpServletResponse response, String domain) {
+	/*public void deleteCookiesFromDomain(HttpServletRequest request, HttpServletResponse response, String domain) {
 	    	try {
 				Arrays.stream(request.getCookies()).filter(cookie -> cookie.getDomain().equals(domain)).forEach(cookie -> {
 		    	if (cookie!= null)
