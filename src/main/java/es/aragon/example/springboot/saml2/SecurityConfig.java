@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	 	String relyingPartyEntityId = "https://samladfs-tpvams.apps.pre.aragon.es/saml2/service-provider-metadata/testSAML";
 		String assertingConsumerServiceLocation = "https://samladfs-tpvams.apps.pre.aragon.es/login/saml2/sso/testSAML";
-		
+		 
 	    RelyingPartyRegistration registration = RelyingPartyRegistration
 	            .withRegistrationId("testSAML")
 	            .entityId(relyingPartyEntityId)
@@ -87,7 +87,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            .assertingPartyDetails(party -> party
 	                .entityId("http://ssoa.aragon.es/adfs/services/trust")
 	                .singleSignOnServiceLocation("https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon")
-	                .singleLogoutServiceLocation("https://samladfs-tpvams.apps.pre.aragon.es/logout/saml2/slo")
+	                //.singleLogoutServiceLocation("https://samladfs-tpvams.apps.pre.aragon.es/logout/saml2/slo")
+	                .singleLogoutServiceLocation("https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0")
 	                .wantAuthnRequestsSigned(false)
 	                .verificationX509Credentials(c -> c.add(credential))
 	            ).build();
