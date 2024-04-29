@@ -7,6 +7,28 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" type="text/css" href="https://desy.aragon.es/pages/desy-html-templates/css/styles.css"/>
 		<script>
+		
+		function lanzarLogout() {
+			
+		     var mensaje = confirm("¿Deseas cerrar la sesión?");
+
+		        if (mensaje) {
+		        	
+		        	const xhr = new XMLHttpRequest();
+		        	xhr.open("GET", "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0");
+		        	xhr.send();
+		        	xhr.responseType = "json";
+		        	xhr.onload = () => {
+		        	  if (xhr.readyState == 4 && xhr.status == 200) {
+		        	    const data = xhr.response;
+		        	    console.log(data);
+		        	    location.href = "https://samladfs-tpvams.apps.pre.aragon.es/logout";
+		        	  } else {
+		        	    console.log(`Error: ${xhr.status}`);
+		        	  }
+		        	};
+		        }
+		}
 		function cerrar() {
 			
 		     var mensaje = confirm("¿Deseas cerrar la sesión?");
@@ -182,6 +204,8 @@
     </dd>
   </div>
   <p>Pulse <a th:href="@{/logout}" class="c-link">aquí </a> para cerrar sesion.</p>
+  <a class="prev" onclick="lanzarLogout()">Cerrar Sesion</a>
+		 <button onclick="lanzarLogout()">Haz clic</button>
 
 </dl>
 <!-- /description-list -->

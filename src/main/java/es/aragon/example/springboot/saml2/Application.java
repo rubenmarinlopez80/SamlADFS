@@ -1,23 +1,17 @@
 package es.aragon.example.springboot.saml2;
 
-import java.util.Arrays;
 import java.util.Map;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.saml2.provider.service.authentication.Saml2AuthenticatedPrincipal;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.security.web.authentication.logout.*;
 
 
 @SpringBootApplication
@@ -51,12 +45,17 @@ public class Application {
 		return "hello";
 	}
 	
-	/*SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+	SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 
-	@RequestMapping("/mylogout")
-	public String performLogout(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
+	/*@RequestMapping("/mylogout")
+	public String performLogout(@AuthenticationPrincipal Saml2AuthenticatedPrincipal principal, HttpServletRequest request, HttpServletResponse response) {
 	    // .. perform logout
 		logger.info("Entramos al logout");
+		
+		
+
+	    return "home";
+	    
 	    //this.logoutHandler.logout(request, response, authentication);
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
@@ -71,7 +70,7 @@ public class Application {
 	    deleteCookiesFromDomain(request,response,"samladfs-tpvams.apps.pre.aragon.es");
 	    deleteCookiesFromDomain(request,response,"ssoa.aragon.es");
 
-		return "home";
+		
 	}
 	
 	public void deleteCookiesFromDomain(HttpServletRequest request, HttpServletResponse response, String domain) {
