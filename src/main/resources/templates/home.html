@@ -14,7 +14,7 @@
 		        if (mensaje) {
 		        	
 		        	const xhr = new XMLHttpRequest();
-		        	xhr.open("GET", "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0");
+		        	xhr.open("POST", "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0");
 		        	xhr.send();
 		        	xhr.responseType = "json";
 		        	xhr.onload = () => {
@@ -161,7 +161,6 @@
 <!-- /header-advanced -->
 
 		<p>Pulse <a th:href="@{/secured/hello}" class="c-link">aquí </a>para acceder a una página segura.</p>
-		<p>Pulse <a th:href="@{/logout}" class="c-link">aquí </a>para acceder a una página segura.</p>
 		 <a class="prev" onclick="lanzarLogout()">Cerrar Sesion</a>
 		 <button onclick="lanzarLogout()">Haz clic</button>
 		<!-- footer -->
