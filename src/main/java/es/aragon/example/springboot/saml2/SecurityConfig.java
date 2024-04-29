@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.security.cert.X509Certificate;
 
 import javax.servlet.http.HttpServletRequest;
-
+import org.springframework.security.config.Customizer;
 import org.apache.commons.io.FileUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.opensaml.security.x509.X509Support;
@@ -39,19 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    	.authorizeRequests(authorize -> 
 	    		authorize.antMatchers("/").permitAll().anyRequest().authenticated()
 	        )
-	    	.saml2Login();
-		
-
-		  /* http
-	        .logout(logout ->                                                       
-	            logout
-	                .logoutUrl("/logout")                                        
-	                .logoutSuccessUrl("/")                             
-	                .invalidateHttpSession(true)  
-	                .deleteCookies("JSESSIONID","c90842ecbf0488c89c2e45321ba1c45d","SamlSession","MSISAuth","MSISAuthenticated","MSISLoopDetectionCookie") 
-	                .clearAuthentication(true)
-	            
-	        );*/
+	    	.saml2Login(Customizer.withDefaults())
+			.saml2Logout(Customizer.withDefaults());
 
 		// add auto-generation of ServiceProvider Metadata
 		Converter<HttpServletRequest, RelyingPartyRegistration> relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
@@ -87,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            .assertingPartyDetails(party -> party
 	                .entityId("http://ssoa.aragon.es/adfs/services/trust")
 	                .singleSignOnServiceLocation("https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon")
+	                .singleLogoutServiceLocation("https://samladfs-tpvams.apps.pre.aragon.es/logout/saml2/slo")
 	                .wantAuthnRequestsSigned(false)
 	                .verificationX509Credentials(c -> c.add(credential))
 	            ).build();
