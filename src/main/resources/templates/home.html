@@ -14,7 +14,7 @@
 		        if (mensaje) {
 		        	
 		        	const xhr = new XMLHttpRequest();
-		        	xhr.open("POST", "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0",true);
+		        	xhr.open("GET", "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0",true);
 		        	xhr.send();
 		        	xhr.responseType = "jsonp";
 		        	xhr.onload = () => {
