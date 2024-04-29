@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private RelyingPartyRegistrationRepository relyingPartyRegistrationRepository;
+	@Autowired
 	private Saml2LogoutRequestResolver logoutRequestResolver;
 
 	@Override
