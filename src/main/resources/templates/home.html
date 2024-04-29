@@ -14,9 +14,9 @@
 		        if (mensaje) {
 		        	
 		        	const xhr = new XMLHttpRequest();
-		        	xhr.open("POST", "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0");
+		        	xhr.open("POST", "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0",true);
 		        	xhr.send();
-		        	xhr.responseType = "json";
+		        	xhr.responseType = "jsonp";
 		        	xhr.onload = () => {
 		        	  if (xhr.readyState == 4 && xhr.status == 200) {
 		        	    const data = xhr.response;
@@ -27,6 +27,7 @@
 		        	  }
 		        	};
 		        }
+		 }
 		
 		function cerrar() {
 			
