@@ -58,20 +58,32 @@ public class Application {
 	    // .. perform logout
 		logger.info("Entramos al logout");
 		
-		String url = "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0";
+		String url = "https://ssoa.aragon.es/adfs/ls/";
 		try {
 			URL obj= new URL(url);
 			
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 	
 			// optional default is GET
-			con.setRequestMethod("GET");
-	
-			//add request header
+			con.setRequestMethod("POST");
+			con.setReadTimeout(10000);
+			con.setConnectTimeout(15000);
 			con.setRequestProperty("cache-control", "no-cache");
+			con.setDoInput(true);
+			con.setDoOutput(true);
+			
+			
+			// write out form parameters
+			String postParamaters = "wa=wsignout1.0";
+			con.setFixedLengthStreamingMode(postParamaters.getBytes().length);
+			PrintWriter out = new PrintWriter(con.getOutputStream());
+			out.print(postParamaters);
+			out.close();
+
 			con.connect();
+			
 			int responseCode = con.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + url);
+			System.out.println("\nSending 'POST' request to URL : " + url);
 			System.out.println("Response Code : " + responseCode);
 	
 			BufferedReader in = new BufferedReader(
