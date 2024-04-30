@@ -65,12 +65,10 @@ public class Application {
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 	
 			// optional default is GET
-			con.setRequestMethod("POST");
+			con.setRequestMethod("GET");
 	
 			//add request header
 			con.setRequestProperty("cache-control", "no-cache");
-			con.setRequestProperty("X-API-KEY", "myApiKey");
-			con.setRequestProperty("X-API-EMAIL", "myEmail@mail.com");
 	
 			int responseCode = con.getResponseCode();
 			System.out.println("\nSending 'GET' request to URL : " + url);
