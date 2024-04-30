@@ -65,7 +65,7 @@ public class Application {
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 	
 			// optional default is GET
-			con.setRequestMethod("GET");
+			con.setRequestMethod("POST");
 	
 			//add request header
 			con.setRequestProperty("cache-control", "no-cache");
