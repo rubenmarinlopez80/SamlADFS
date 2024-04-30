@@ -89,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                .singleSignOnServiceLocation("https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon")
 	                .singleLogoutServiceLocation("https://samladfs-tpvams.apps.pre.aragon.es/logout/saml2/slo")
 	                //.singleLogoutServiceLocation("https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0")
-	                .wantAuthnRequestsSigned(false)
+	                .wantAuthnRequestsSigned(true)
 	                .verificationX509Credentials(c -> c.add(credential))
 	            ).build();
 	    return new InMemoryRelyingPartyRegistrationRepository(registration);
