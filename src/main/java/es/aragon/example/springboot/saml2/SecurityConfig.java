@@ -46,8 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http
 	    	.authorizeRequests(authorize -> 
-	    		authorize.antMatchers("","/logout").permitAll().
-	    		anyRequest().authenticated()
+	    		authorize.antMatchers("").permitAll().anyRequest().authenticated()
 	        )
 	    	.saml2Login(Customizer.withDefaults())
 	    	.saml2Logout(Customizer.withDefaults())
