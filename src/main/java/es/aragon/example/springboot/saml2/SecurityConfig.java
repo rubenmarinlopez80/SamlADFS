@@ -49,8 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    		authorize.antMatchers("/").permitAll().anyRequest().authenticated()
 	        )
 	    	.saml2Login(Customizer.withDefaults())
-	    	.saml2Logout(Customizer.withDefaults());
-
+	    	.saml2Logout(Customizer.withDefaults())
+	    	.logout((logout) ->
+				logout.deleteCookies("remove")
+					.invalidateHttpSession(true)
+					.logoutUrl("https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon")
+					.logoutSuccessUrl("/logout"));
 
 		// add auto-generation of ServiceProvider Metadata
 		Converter<HttpServletRequest, RelyingPartyRegistration> relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
