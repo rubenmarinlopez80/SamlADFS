@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.invalidateHttpSession(true)
 					.clearAuthentication(true)
 					.logoutUrl("/logout")
-					.logoutSuccessUrl("https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon"));
+					.logoutSuccessUrl("/"));
 
 		// add auto-generation of ServiceProvider Metadata
 		Converter<HttpServletRequest, RelyingPartyRegistration> relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
