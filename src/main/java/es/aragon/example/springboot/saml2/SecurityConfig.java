@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				logout.deleteCookies("remove")
 					.invalidateHttpSession(true)
 					.clearAuthentication(true)
-					.logoutUrl("/logout")
+					.logoutUrl("https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0")
 					.logoutSuccessUrl("/"));
 
 		// add auto-generation of ServiceProvider Metadata
