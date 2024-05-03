@@ -51,7 +51,7 @@ public class Application {
 		return "hello";
 	}
 	
-	SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+	/*SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 
 	@RequestMapping("/mylogout")
 	public String performLogout(@AuthenticationPrincipal Saml2AuthenticatedPrincipal principal, HttpServletRequest request, HttpServletResponse response) {
@@ -107,7 +107,7 @@ public class Application {
 
 	    return "home";
 	    
-	    /*//this.logoutHandler.logout(request, response, authentication);
+	    //this.logoutHandler.logout(request, response, authentication);
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
 	      int i = 0;
@@ -119,12 +119,12 @@ public class Application {
 	      }
 	    }
 	    deleteCookiesFromDomain(request,response,"samladfs-tpvams.apps.pre.aragon.es");
-	    deleteCookiesFromDomain(request,response,"ssoa.aragon.es");*/
+	    deleteCookiesFromDomain(request,response,"ssoa.aragon.es");
 
 		
 	}
 	
-	/*public void deleteCookiesFromDomain(HttpServletRequest request, HttpServletResponse response, String domain) {
+	public void deleteCookiesFromDomain(HttpServletRequest request, HttpServletResponse response, String domain) {
 	    	try {
 				Arrays.stream(request.getCookies()).filter(cookie -> cookie.getDomain().equals(domain)).forEach(cookie -> {
 		    	if (cookie!= null)
