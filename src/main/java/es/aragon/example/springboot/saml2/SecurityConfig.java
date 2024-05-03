@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				logout.deleteCookies("remove")
 					.invalidateHttpSession(true)
 					.clearAuthentication(true)
-					.logoutUrl("/logout")
+					.logoutUrl("/mylogout")
 					.logoutSuccessUrl("/"));
 
 		// add auto-generation of ServiceProvider Metadata
