@@ -49,12 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    		authorize.antMatchers("/","/logout").permitAll().anyRequest().authenticated()
 	        )
 	    	.saml2Login(Customizer.withDefaults())
-	    	.saml2Logout(Customizer.withDefaults())
+	    	//.saml2Logout(Customizer.withDefaults())
 	    	.logout((logout) ->
 				logout.deleteCookies("remove")
 					.invalidateHttpSession(true)
 					.clearAuthentication(true)
-					.logoutUrl("/mylogout")
+					.logoutUrl("/logout")
 					.logoutSuccessUrl("/"));
 
 		// add auto-generation of ServiceProvider Metadata
