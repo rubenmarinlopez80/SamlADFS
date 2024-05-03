@@ -53,7 +53,7 @@ public class Application {
 	
 	SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 
-	@RequestMapping("/mylogout")
+	@RequestMapping("/logout")
 	public String performLogout(@AuthenticationPrincipal Saml2AuthenticatedPrincipal principal, HttpServletRequest request, HttpServletResponse response) {
 	    // .. perform logout
 		logger.info("Entramos al logout");
