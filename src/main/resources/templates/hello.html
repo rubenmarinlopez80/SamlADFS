@@ -11,7 +11,6 @@
 			function cerrarSesion() {
 				alert('Procedemos con el Logout');
 				window.open('https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0');
-				//window.location.href = "https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0";
 				document.getElementById('formLogout').submit();
 			}
 		
@@ -126,13 +125,13 @@
      <p th:text=${name} />
     </dd>
   </div>
-  <p>Pulse <a href="https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon" target="_blank" class="c-link">aquí </a> para cerrar sesion 1.</p>
+  <!-- <p>Pulse <a href="https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon" target="_blank" class="c-link">aquí </a> para cerrar sesion 1.</p>-->
     <form action="#" th:action="@{/logout}" method="post" name="formLogout" id="formLogout">
   	<!--  <p>Pulse <a th:href="@{/logout}" class="c-link">aquí </a> para cerrar sesion 2.</p>-->
-   <input
+   <button
                 type="submit"
-                class="button"
-                value="logout" name="logout" onclick="cerrarSesion();"/>
+                class="c-button"
+                value="Logout" name="Logout" onclick="cerrarSesion();"/>
      </form>
  
 </dl>
