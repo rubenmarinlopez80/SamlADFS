@@ -65,7 +65,7 @@ public class Application {
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 	
 			// optional default is GET
-			con.setRequestMethod("GET");
+			con.setRequestMethod("POST");
 			con.setReadTimeout(10000);
 			con.setConnectTimeout(15000);
 			con.setRequestProperty("cache-control", "no-cache");
@@ -83,7 +83,8 @@ public class Application {
 			con.connect();
 			
 			int responseCode = con.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + url);
+			System.out.println("\nSending 'POST"
+					+ "' request to URL : " + url);
 			System.out.println("Response Code : " + responseCode);
 	
 			BufferedReader in = new BufferedReader(
@@ -118,8 +119,8 @@ public class Application {
 	          i++;
 	      }
 	    }
-	    deleteCookiesFromDomain(request,response,"samladfs-tpvams.apps.pre.aragon.es");
-	    deleteCookiesFromDomain(request,response,"ssoa.aragon.es");
+	    //deleteCookiesFromDomain(request,response,"samladfs-tpvams.apps.pre.aragon.es");
+	    //deleteCookiesFromDomain(request,response,"ssoa.aragon.es");
 
 		
 	}
