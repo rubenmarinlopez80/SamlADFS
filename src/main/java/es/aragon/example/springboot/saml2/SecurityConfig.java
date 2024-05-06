@@ -49,13 +49,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    		authorize.antMatchers("/","/logout").permitAll().anyRequest().authenticated()
 	        )
 	    	.saml2Login(Customizer.withDefaults())
-	    	//.saml2Logout(Customizer.withDefaults())
-	    	.logout((logout) ->
+	    	.saml2Logout(Customizer.withDefaults());
+	    	/*.logout((logout) ->
 				logout.deleteCookies("remove")
 					.invalidateHttpSession(true)
 					.clearAuthentication(true)
 					.logoutUrl("/logout")
-					.logoutSuccessUrl("/"));
+					.logoutSuccessUrl("/"));*/
 
 		// add auto-generation of ServiceProvider Metadata
 		Converter<HttpServletRequest, RelyingPartyRegistration> relyingPartyRegistrationResolver = new DefaultRelyingPartyRegistrationResolver(relyingPartyRegistrationRepository);
@@ -92,9 +92,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            .assertingPartyDetails(party -> party
 	                .entityId("http://ssoa.aragon.es/adfs/services/trust")
 	                .singleSignOnServiceLocation("https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon")
-	                .singleLogoutServiceLocation("https://samladfs-tpvams.apps.pre.aragon.es/logout/saml2/slo")
+	                //.singleLogoutServiceLocation("https://samladfs-tpvams.apps.pre.aragon.es/logout/saml2/slo")
 	                //.singleLogoutServiceLocation("https://ssoa.aragon.es/adfs/oauth2/logout")
-	                //.singleLogoutServiceLocation("https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0")
+	                .singleLogoutServiceLocation("https://ssoa.aragon.es/adfs/ls/?wa=wsignout1.0")
 	                .wantAuthnRequestsSigned(false)
 	                .verificationX509Credentials(c -> c.add(credential))
 	            ).build();
