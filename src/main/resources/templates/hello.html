@@ -117,14 +117,7 @@
      <p th:text=${name} />
     </dd>
   </div>
-  <div class="lg:flex py-sm">
-    <dt class="lg:w-1/3">
-      CerrarSession
-    </dt>
-    <dd class="lg:flex-1 font-semibold">
-     <p th:text=${name} />
-    </dd>
-  </div>
+
   <!-- <p>Pulse <a href="https://ssoa.aragon.es/adfs/ls/IdpInitiatedSignon" target="_blank" class="c-link">aquí </a> para cerrar sesion 1.</p>-->
     <form action="#" th:action="@{/logout}" method="post" name="formLogout" id="formLogout">
   	<!--  <p>Pulse <a th:href="@{/logout}" class="c-link">aquí </a> para cerrar sesion 2.</p>-->
